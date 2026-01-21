@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "86917926046",
+    "project_id": "smart-queue-manager-1",
+    "storage_bucket": "smart-queue-manager-1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:86917926046:android:19eea6dc14f7f8ba207f8f",
+        "android_client_info": {
+          "package_name": "com.example.koku"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG47tN2IgOqrb02NUvEA0-TXcGyGSVg6s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
