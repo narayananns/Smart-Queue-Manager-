@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:koku/screens/login_screen.dart';
+import 'package:koku/screens/auth_screens/login_screen.dart';
 
 void main() {
   runApp(const MyApp());

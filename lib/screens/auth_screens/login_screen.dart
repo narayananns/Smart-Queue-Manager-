@@ -2,7 +2,8 @@ import "package:flutter/material.dart";
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:google_sign_in/google_sign_in.dart";
 import "package:flutter_facebook_auth/flutter_facebook_auth.dart";
-import "signup_screen.dart";
+import '../main/home_page.dart';
+import 'signup_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -126,6 +127,12 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                         onPressed: () {
                           // Handle login logic here
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ),
+                          );
                         },
                         child: Text(
                           "Log In",

@@ -3,6 +3,7 @@ import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import "package:google_sign_in/google_sign_in.dart";
 import "package:flutter_facebook_auth/flutter_facebook_auth.dart";
 import "package:email_otp/email_otp.dart";
+import '../main/home_page.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -146,13 +147,17 @@ class _SignupScreenState extends State<SignupScreen> {
                                     EmailOTP.config(
                                       appName: "Smart Queue Manager",
                                       otpType: OTPType.numeric,
-                                      emailTheme: EmailTheme.v1,
                                       otpLength: 6,
                                     );
 
-                                    final bool result = await EmailOTP.sendOTP(
-                                      email: _emailController.text,
+                                    debugPrint(
+                                      "Sending OTP to: ${_emailController.text.trim()}",
                                     );
+
+                                    final bool result = await EmailOTP.sendOTP(
+                                      email: _emailController.text.trim(),
+                                    );
+                                    debugPrint("OTP Send Result: $result");
                                     if (!context.mounted) return;
 
                                     setState(() {
@@ -292,7 +297,20 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           ),
                           onPressed: () {
-                            // Handle signup logic here
+                            if (_isEmailVerified) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text("Please verify email first"),
+                                ),
+                              );
+                            }
                           },
                           child: Text(
                             "Sign Up",
