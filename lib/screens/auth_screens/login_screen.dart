@@ -35,7 +35,7 @@ class _LoginScreenState extends State<LoginScreen> {
             top: 0,
             left: 0,
             right: 0,
-            height: h * 0.5,
+            height: h * 0.4,
             child: Container(
               color: Colors.deepPurple,
               child: Center(
@@ -55,7 +55,7 @@ class _LoginScreenState extends State<LoginScreen> {
             bottom: 0,
             left: 0,
             right: 0,
-            height: h * 0.6,
+            height: h * 0.7,
             child: Container(
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -66,87 +66,95 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               child: Padding(
                 padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Login to Your Account",
-                      style: TextStyle(
-                        fontSize: h * 0.03,
-                        fontWeight: FontWeight.bold,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        "Login to Your Account",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: h * 0.03,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      "Enter Your Credentials",
-                      style: TextStyle(
-                        fontSize: h * 0.025,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[600],
+                      Text(
+                        "Enter Your Credentials",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: h * 0.02,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[600],
+                        ),
                       ),
-                    ),
-                    SizedBox(height: h * 0.02),
-                    TextField(
-                      controller: _usernameController,
-                      decoration: InputDecoration(
-                        labelText: "Username",
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.person),
+                      SizedBox(height: h * 0.03),
+                      TextField(
+                        controller: _usernameController,
+                        decoration: const InputDecoration(
+                          labelText: "Username",
+                          border: OutlineInputBorder(),
+                          prefixIcon: Icon(Icons.person),
+                        ),
                       ),
-                    ),
-                    SizedBox(height: h * 0.01),
-                    TextField(
-                      controller: _passwordController,
-                      obscureText: !_isPasswordVisible,
-                      decoration: InputDecoration(
-                        labelText: "Password",
-                        border: const OutlineInputBorder(),
-                        prefixIcon: const Icon(Icons.lock),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            _isPasswordVisible
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                      SizedBox(height: h * 0.02),
+                      TextField(
+                        controller: _passwordController,
+                        obscureText: !_isPasswordVisible,
+                        decoration: InputDecoration(
+                          labelText: "Password",
+                          border: const OutlineInputBorder(),
+                          prefixIcon: const Icon(Icons.lock),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              _isPasswordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                _isPasswordVisible = !_isPasswordVisible;
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: h * 0.03),
+                      SizedBox(
+                        height: 50,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.deepPurple,
+                            foregroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
                           onPressed: () {
-                            setState(() {
-                              _isPasswordVisible = !_isPasswordVisible;
-                            });
+                            // Handle login logic here
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomePage(),
+                              ),
+                            );
                           },
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: h * 0.02),
-                    SizedBox(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.deepPurple,
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
+                          child: Text(
+                            "Log In",
+                            style: TextStyle(fontSize: h * 0.025),
                           ),
                         ),
-                        onPressed: () {
-                          // Handle login logic here
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const HomePage(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "Log In",
-                          style: TextStyle(fontSize: h * 0.03),
-                        ),
                       ),
-                    ),
-                    _buildForgotPassword(),
-                    _buildSignupLink(),
-                    SizedBox(height: h * 0.02),
-                    _buildDivider(),
-                    SizedBox(height: h * 0.02),
-                    _buildSocialLogin(),
-                  ],
+                      SizedBox(height: h * 0.02),
+                      _buildForgotPassword(),
+                      _buildSignupLink(),
+                      SizedBox(height: h * 0.03),
+                      _buildDivider(),
+                      SizedBox(height: h * 0.03),
+                      _buildSocialLogin(),
+                      SizedBox(height: h * 0.05), // Extra padding for bottom
+                    ],
+                  ),
                 ),
               ),
             ),

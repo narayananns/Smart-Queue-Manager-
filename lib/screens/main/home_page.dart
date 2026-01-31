@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../auth_screens/login_screen.dart';
+import 'create_queue_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -34,6 +36,15 @@ class _HomePageState extends State<HomePage> {
 
   void _handleMenuSelection(String value) {
     if (!mounted) return;
+
+    if (value == 'Logout') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+      );
+      return;
+    }
+
     ScaffoldMessenger.of(
       context,
     ).showSnackBar(SnackBar(content: Text('Selected: $value')));
@@ -114,6 +125,14 @@ class _HomePageState extends State<HomePage> {
                     contentPadding: EdgeInsets.zero,
                   ),
                 ),
+                const PopupMenuItem(
+                  value: 'Logout',
+                  child: ListTile(
+                    leading: Icon(Icons.logout, color: Colors.deepPurple),
+                    title: Text('Logout'),
+                    contentPadding: EdgeInsets.zero,
+                  ),
+                ),
               ];
             },
           ),
@@ -150,6 +169,16 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87,
+                ),
+              ),
+              SizedBox(height: h * 0.015),
+              const Text(
+                "Focus on what matters , Let us manage the queue for you!",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.grey,
                 ),
               ),
               SizedBox(height: h * 0.05),
@@ -207,9 +236,10 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.deepPurple,
         foregroundColor: Colors.white,
         onPressed: () {
-          ScaffoldMessenger.of(
+          Navigator.push(
             context,
-          ).showSnackBar(const SnackBar(content: Text("Create Queue clicked")));
+            MaterialPageRoute(builder: (context) => const CreateQueueScreen()),
+          );
         },
         icon: const Icon(Icons.add),
         label: const Text("Create a Queue"),
